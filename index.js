@@ -10,12 +10,12 @@ app.use(morgan('dev'));
 
 RouterBuilder.build(app);
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 4000;
 app.listen(port, () => console.log(`Fortnite starting on port ${port}...`));
 finit();
 
 async function finit() {
-  await msleep(200);
+
   console.log(`
     ⠀⠀⠀⣀⣤\n
   ⠀⠀⠀⠀⣿⠿⣶\n
@@ -36,7 +36,7 @@ async function finit() {
   ⠀⠀⠀⠀⣿⠀⠀⠀⠀⠀⠀⣿⣿\n
   ⠀⠀⠀⠀⣛⠀⠀⠀⠀⠀⠀⠛⠿⠿⠿\n
   ⠀⠀⠀⠛⠛\n`);
-  await msleep(200);
+
   console.log(`
     ⠀⠀⠀⠀⠀⠀⠀⠀⣤⣿⣿⠶⠀⠀⣀⣀\n
   ⠀⠀⠀⠀⠀⠀⣀⣀⣤⣤⣶⣿⣿⣿⣿⣿⣿\n
@@ -54,7 +54,7 @@ async function finit() {
   ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿\n
   ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⣀\n
   ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣶⣿\n`);
-  await msleep(200);
+
   console.log(`
     ⠀⠀⠀⠀⠀⠀⣤⣶⣶\n
     ⠀⠀⠀⠀⠀⠀⣿⣿⣿⣿⣀⣀\n
@@ -72,7 +72,7 @@ async function finit() {
     ⠀⠀⠀⠀⠀⠀⠀⣿⠀⠀⠀⠀⠀⠀⣀⣿\n
     ⠀⠀⠀⠀⠀⠀⣀⣿⣿\n
     ⠀⠀⠀⠀⠤⣿⠿⠿⠿\n`);
-  await msleep(200);
+
   console.log(`
     ⠀⠀⠀⠀⣀\n
     ⠀⠀⣶⣿⠿⠀⠀⠀⣀⠀⣤⣤\n
@@ -93,7 +93,7 @@ async function finit() {
     ⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⠀⠀⠀⣶⣿⠛⠉\n
     ⠀⠀⠀⠀⠀⠀⠀⠀⣤⣿⣿⠀⠀⠉\n
     ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉\n`);
-  await msleep(200);
+
   console.log(`
     ⠀⠀⠀⠀⠀⠀⣶⣿⣶\n
     ⠀⠀⠀⣤⣤⣤⣿⣿⣿\n
@@ -111,7 +111,7 @@ async function finit() {
     ⠀⠀⠀⠀⣶⣿⠀⠀⠀⣿⣶\n
     ⠀⠀⠀⠀⠀⠀⠀⠀⠀⣭⣿⣿\n
     ⠀⠀⠀⠀⠀⠀⠀⠀⣤⣿⣿⠉\n`);
-  await msleep(200);
+
   console.log(`
     ⠀⠀⠀⠀⠀⠀⠀⠀⠀⣤⣶\n
     ⠀⠀⠀⠀⠀⣀⣀⠀⣶⣿⣿⠶\n
@@ -129,7 +129,7 @@ async function finit() {
     ⠀⠀⠀⠀⠀⠀⣀⣿⠀⠀⣶⣶⠿⠿⠿\n
     ⠀⠀⠀⠀⠀⠀⣿⠛\n
     ⠀⠀⠀⠀⠀⠀⣭⣶\n`);
-  await msleep(200);
+
   console.log(`
     ⠀⠀⠀⠀⠀⠀⠀⠀⠀⣤⣤\n
     ⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⣿⣿\n
@@ -149,7 +149,7 @@ async function finit() {
     ⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⣉⠀⣶⠿\n
     ⠀⠀⠀⠀⠀⠀⠀⠀⣶⣿⠿\n
     ⠀⠀⠀⠀⠀⠀⠀⠛⠿⠛\n`);
-  await msleep(200);
+
   console.log(`
     ⠀⠀⠀⣶⣿⣶\n
     ⠀⠀⠀⣿⣿⣿⣀\n

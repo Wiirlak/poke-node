@@ -3,6 +3,8 @@
 class RouterBuilder {
     build(app) {
         app.use('/sample', require('./sample.router'));
+        app.use('/sample', require('./sample.router'));
+        app.use('/sample', require('./sample.router'));
     }
 }
 

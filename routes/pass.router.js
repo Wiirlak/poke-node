@@ -2,14 +2,14 @@
 
 const express = require('express');
 const bodyParser = require('body-parser');
-const SampleController = require('../controllers').SampleController;
+const PassController = require('../controllers').PassController;
 
 const router = express.Router();
 router.use(bodyParser.json());
 
 router.post('/', async (req, res) => {
     try {
-        const p = await SampleController.addSample(req.body.name, req.body.date, req.body.owner);
+        const p = await PassController.addPass(req.body.name, req.body.date, req.body.owner);
         res.json(p);
     } catch(err) {
         res.status(409).end();
@@ -17,7 +17,7 @@ router.post('/', async (req, res) => {
 });
 
 router.get('/:id', async (req, res) => {
-   const p = await SampleController.getSample(req.params.id);
+   const p = await PassController.getPass(req.params.id);
    if(p) {
        return res.json(p);
    }
