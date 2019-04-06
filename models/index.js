@@ -1,5 +1,8 @@
 'use script';
 
 module.exports = {
-    Sample: require('./sample')
+    sequelize: require('./database'),
+    Sample: require('./sample'),
+    User: require('./user'),
+    Pass: require('./pass')
 };

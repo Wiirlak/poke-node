@@ -2,6 +2,7 @@
 
 const models = require('../models');
 const User = models.User;
+const database = models.database;
 
 class UserController {
 
