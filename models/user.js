@@ -1,25 +1,27 @@
 'use strict';
 
-module.exports = (sequelize, DataTypes) => {
-  const User = sequelize.define('User', {
-    id: {
-      type: DataTypes.INT,
-      unique: true,
-      allowNull: false
-    },
-    username: DataTypes.STRING,
-    password: DataTypes.STRING,
-    status: DataTypes.CHAR
-  }, {
-    freezeTableName: true,
-    paranoid: true,
-    underscored: true
-  });
-  User.associate = function(models) {
-    User.hasMany(models.Task);
-  };
-  return User;
-};
+const Model = require('sequelize').Model;
+const sequelize = require('./database').sequelize;
+const Sequelize = require('./database').Sequelize;
+
+class User extends Model{}
+
+User.init({
+  id: {
+        type: Sequelize.INTEGER,
+        unique: true,
+        allowNull: false,
+        primaryKey: true,
+        autoIncrement: true
+  },
+  username: Sequelize.STRING,
+  password: Sequelize.STRING,
+  status: Sequelize.CHAR
+},{ sequelize});
+
+User.sync();
+
+module.exports = User;
 
 function passwordHash(pwd) {
   const bcrypt = require('bcrypt');

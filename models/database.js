@@ -1,6 +1,7 @@
 'use strict';
 
 const Sequelize = require('sequelize');
+const db = {};
 
 const sequelize = new Sequelize(
     process.env.DB_NAME,
@@ -13,5 +14,7 @@ const sequelize = new Sequelize(
     }
 );
 
+db.sequelize = sequelize;
+db.Sequelize = Sequelize;
 
-module.exports = sequelize;
+module.exports = db;

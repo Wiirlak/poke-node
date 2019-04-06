@@ -25,4 +25,13 @@ router.get('/:id', async (req, res) => {
 
 });
 
+router.get('/', async (req, res) => {
+    const p = await UserController.getAll();
+    if(p) {
+        return res.json(p).status(200);
+    }
+    res.status(404).end();
+
+});
+
 module.exports = router;
