@@ -27,26 +27,28 @@ class UserController {
         return await User.findAll();
     }
 
+    passwordHash(pwd) {
+        const bcrypt = require('bcrypt');
+        const saltRounds = 10;
+        bcrypt.hash(pwd, saltRounds, function(err, hash) {
+            // Store hash in your password DB.
+        });
+    }
+
+    async checkUser(usr, pwd) {
+        const match =  bcrypt.compare(pwd, usr.password);
+
+        if(match) {
+            //login
+        }
+
+        //...
+    }
+
 }
 
 module.exports = new UserController();
 
 
-function passwordHash(pwd) {
-    const bcrypt = require('bcrypt');
-    const saltRounds = 10;
-    bcrypt.hash(pwd, saltRounds, function(err, hash) {
-        // Store hash in your password DB.
-    });
-}
 
-async function checkUser(usr, pwd) {
-    const match = await bcrypt.compare(pwd, usr.password);
-
-    if(match) {
-        //login
-    }
-
-    //...
-}
 

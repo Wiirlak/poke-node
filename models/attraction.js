@@ -3,6 +3,9 @@
 const Model = require('sequelize').Model;
 const sequelize = require('./database').sequelize;
 const Sequelize = require('./database').Sequelize;
+const MaintenanceSchelude = require('./maintenanceSchedule');
+const Pass = require('./pass');
+const PassAccessAttraction = require('./passAccessAttraction');
 
 class Attraction extends Model{}
 
@@ -17,12 +20,18 @@ Attraction.init({
   name:           Sequelize.STRING,
   capacity:       Sequelize.INTEGER,
   mininum_height: Sequelize.INTEGER,
-  //image ?
   duration:       Sequelize.INTEGER,
   opening:        Sequelize.TIME,
   status:         Sequelize.STRING,
   type:           Sequelize.STRING
 }, { sequelize});
+
+Attraction.associate = function (){
+  Attraction.hasMany(MaintenanceSchelude);
+  Attraction.belongsToMany(Pass, { through: PassAccessAttraction });
+};
+
+
 
 Attraction.sync({force:true});
 

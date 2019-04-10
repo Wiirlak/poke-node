@@ -19,6 +19,6 @@ User.init({
   status:       Sequelize.CHAR
 },{ sequelize});
 
-User.sync({force:true});
+User.sync();
 
 module.exports = User;
