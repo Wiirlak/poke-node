@@ -5,9 +5,14 @@ const Attraction = models.Attraction;
 
 class AttractionController {
 
-    async addAttraction(data) {
+    async addAttraction(capacity,mininum_height,duration,opening,status,type) {
         return Attraction.create({
-           data
+            capacity,
+            minimum_height,
+            duration
+            ,opening,
+            status,
+            type
         });
     }
 
@@ -19,6 +24,9 @@ class AttractionController {
         });
     }
 
+    async getAll(){
+        return await Attraction.findAll();
+    }
 }
 
 module.exports = new AttractionController();

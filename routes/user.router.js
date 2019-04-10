@@ -9,7 +9,7 @@ router.use(bodyParser.json());
 
 router.post('/', async (req, res) => {
     try {
-        const p = await UserController.addUser(req.body.name, req.body.date, req.body.owner);
+        const p = await UserController.addUser(req.body.username, req.body.password, req.body.status );
         res.json(p);
     } catch(err) {
         res.status(409).end();

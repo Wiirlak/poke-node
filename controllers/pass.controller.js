@@ -2,12 +2,16 @@
 
 const models = require('../models');
 const Pass = models.Pass;
+const database = models.database;
 
 class PassController {
 
-    async addPass(data) {
+    async addPass(date_end, date_begin, date_in, date_out) {
         return Pass.create({
-           data
+            date_end,
+            date_begin,
+            date_in,
+            date_out
         });
     }
 
@@ -17,6 +21,10 @@ class PassController {
                 id: id
             }
         });
+    }
+
+    async getAll(){
+        return await Pass.findAll();
     }
 
 }

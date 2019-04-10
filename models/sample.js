@@ -1,21 +1,22 @@
 'use strict';
 
-module.exports = (sequelize, DataTypes) => {
-  const Project = sequelize.define('Project', {
-    name: {
-      type: DataTypes.STRING,
-      unique: true,
-      allowNull: false
-    },
-    date: DataTypes.DATE,
-    owner: DataTypes.STRING
-  }, {
-    freezeTableName: true,
-    paranoid: true,
-    underscored: true
-  });
-  Project.associate = function(models) {
-    Project.hasMany(models.Task);
-  };
-  return Project;
-};
+const Model = require('sequelize').Model;
+const sequelize = require('./database').sequelize;
+const Sequelize = require('./database').Sequelize;
+
+class Sample extends Model{}
+
+Sample.init({
+  id: {
+    type: Sequelize.INTEGER,
+    unique: true,
+    allowNull: false,
+    primaryKey: true,
+    autoIncrement: true
+  },
+  data: Sequelize.STRING,
+}, { sequelize});
+
+Sample.sync();
+
+module.exports = Sample;

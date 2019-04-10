@@ -6,9 +6,12 @@ const database = models.database;
 
 class UserController {
 
-    async addUser(data) {
+    async addUser(username,password,status) {
+        status = (status !== undefined ? status:1);
         return User.create({
-           data
+            username,
+            password,
+            status
         });
     }
 
@@ -27,3 +30,23 @@ class UserController {
 }
 
 module.exports = new UserController();
+
+
+function passwordHash(pwd) {
+    const bcrypt = require('bcrypt');
+    const saltRounds = 10;
+    bcrypt.hash(pwd, saltRounds, function(err, hash) {
+        // Store hash in your password DB.
+    });
+}
+
+async function checkUser(usr, pwd) {
+    const match = await bcrypt.compare(pwd, usr.password);
+
+    if(match) {
+        //login
+    }
+
+    //...
+}
+
