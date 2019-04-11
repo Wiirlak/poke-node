@@ -4,9 +4,9 @@ const Model = require('sequelize').Model;
 const sequelize = require('./database').sequelize;
 const Sequelize = require('./database').Sequelize;
 
-class PassType extends Model{}
+class PassQueueAttraction extends Model{}
 
-PassType.init({
+PassQueueAttraction.init({
     id: {
         type: Sequelize.INTEGER,
         unique: true,
@@ -14,12 +14,8 @@ PassType.init({
         primaryKey: true,
         autoIncrement: true
     },
-    name: Sequelize.STRING,
-    description: Sequelize.STRING,
-    attraction_path: Sequelize.STRING
 }, { sequelize});
 
-// PassType.sync();
+// PassQueueAttraction.sync({force:true});
 
-
-module.exports = PassType;
+module.exports = PassQueueAttraction;

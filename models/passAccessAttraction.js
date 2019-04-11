@@ -14,9 +14,9 @@ PassAccessAttraction.init({
         primaryKey: true,
         autoIncrement: true
     },
-    date_access:     Sequelize.DATE,
+    date_access:     Sequelize.DATE
 }, { sequelize});
 
-PassAccessAttraction.sync({force:true});
+// PassAccessAttraction.sync({force:true});
 
 module.exports = PassAccessAttraction;

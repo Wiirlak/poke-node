@@ -17,18 +17,20 @@ Pass.init({
     primaryKey: true,
     autoIncrement: true
   },
-  date_end:     Sequelize.DATE,
   date_begin:   Sequelize.DATE,
+  date_end:     Sequelize.DATE,
   date_in:      Sequelize.DATE,
   date_out:     Sequelize.DATE
 }, { sequelize});
 
 Pass.associate = function(){
   Pass.belongsTo(PassType);
-  Pass.belongsToMany(Attraction, { through: PassAccessAttraction });
+  Pass.belongsToMany(Attraction, {
+    through: PassAccessAttraction,
+    constraints: false });
 };
 
 
-Pass.sync({force:true});
+//Pass.sync({force:true});
 
 module.exports = Pass;

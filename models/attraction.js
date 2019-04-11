@@ -17,22 +17,26 @@ Attraction.init({
     primaryKey:     true,
     autoIncrement:  true
   },
-  name:           Sequelize.STRING,
-  capacity:       Sequelize.INTEGER,
-  mininum_height: Sequelize.INTEGER,
-  duration:       Sequelize.INTEGER,
-  opening:        Sequelize.TIME,
-  status:         Sequelize.STRING,
-  type:           Sequelize.STRING
+  name:             Sequelize.STRING,
+  capacity:         Sequelize.INTEGER,
+  minimum_height:   Sequelize.INTEGER,
+  duration:         Sequelize.INTEGER,
+  opening:          Sequelize.TIME,
+  closure:          Sequelize.TIME,
+  status:           Sequelize.STRING,
+  handicap_access:  Sequelize.INTEGER,
+  type:             Sequelize.STRING
 }, { sequelize});
 
 Attraction.associate = function (){
   Attraction.hasMany(MaintenanceSchelude);
-  Attraction.belongsToMany(Pass, { through: PassAccessAttraction });
+  Attraction.belongsToMany(Pass, {
+    through: PassAccessAttraction,
+    constraints: false });
 };
 
 
 
-Attraction.sync({force:true});
+//Attraction.sync({force:true});
 
 module.exports = Attraction;

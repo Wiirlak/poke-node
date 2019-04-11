@@ -18,7 +18,7 @@ MaintenanceSchedule.init({
     maintenance_date: Sequelize.DATE
 }, { sequelize});
 
-MaintenanceSchedule.sync({force:true});
+// MaintenanceSchedule.sync({force:true});
 
 
 module.exports = MaintenanceSchedule;
