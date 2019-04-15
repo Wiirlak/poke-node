@@ -15,7 +15,8 @@ MaintenanceSchedule.init({
         primaryKey: true,
         autoIncrement: true
     },
-    maintenance_date: Sequelize.DATE
+    maintenance_date:           Sequelize.DATE,
+    maintenance_duration:       Sequelize.INTEGER,
 }, {paranoid: true, sequelize});
 
 // MaintenanceSchedule.sync({force:true});

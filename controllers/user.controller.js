@@ -9,9 +9,9 @@ class UserController {
     async addUser(username,password,status) {
         status = (status !== undefined ? status:1);
         return User.create({
-            username,
-            password,
-            status
+            username: username || "",
+            password: password || "",
+            status: status || "u"
         });
     }
 
@@ -25,6 +25,28 @@ class UserController {
 
     async getAll(){
         return await User.findAll();
+    }
+
+    async updateUser(id, username,password,status){
+        return await User.findOne({
+            where: {
+                id: id
+            }
+        }).then(User =>{
+            return User.update({
+                username : username || User.username,
+                password : password || User.password,
+                status : status || User.status
+            });
+        });
+    }
+
+    async deleteUser(id, force){
+        return await User.destroy({where : {
+                id : id
+            },force : force}).then(deletedUser =>{
+            return deletedUser;
+        });
     }
 
     passwordHash(pwd) {

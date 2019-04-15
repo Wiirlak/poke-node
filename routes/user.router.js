@@ -34,4 +34,32 @@ router.get('/', async (req, res) => {
 
 });
 
+router.patch('/', async (req, res) => {
+    const p = await UserController.updateUser(
+        req.body.id,
+        req.body.username,
+        req.body.password,
+        req.body.status);
+    if(p) {
+        return res.json(p);
+    }
+    res.status(404).end();
+});
+
+router.delete('/:id', async (req, res) => {
+    const p = await UserController.deleteUser(req.params.id,false);
+    if(p === 0) {
+        res.status(200).end();
+    }
+    res.status(404).end();
+});
+
+router.delete('/force/:id', async (req, res) => {
+    const p = await UserController.deleteUser(req.params.id,true);
+    if(p === 0) {
+        res.status(200).end();
+    }
+    res.status(404).end();
+});
+
 module.exports = router;
