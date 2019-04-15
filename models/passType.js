@@ -17,7 +17,7 @@ PassType.init({
     name: Sequelize.STRING,
     description: Sequelize.STRING,
     attraction_path: Sequelize.STRING
-}, { sequelize});
+}, {paranoid: true, sequelize});
 
 // PassType.sync();
 

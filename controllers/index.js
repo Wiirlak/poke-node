@@ -7,4 +7,5 @@ module.exports = {
     AttractionController:   require('./attraction.controller'),
     PassTypeController:         require('./passType.controller'),
     MaintenanceSchedule:   require('./maintenanceSchedule.controller'),
+    DatabaseController:   require('./database.controller')
 };

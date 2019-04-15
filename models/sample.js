@@ -15,7 +15,7 @@ Sample.init({
     autoIncrement: true
   },
   data: Sequelize.STRING,
-}, { sequelize});
+}, { paranoid: true,sequelize});
 
 Sample.sync();
 

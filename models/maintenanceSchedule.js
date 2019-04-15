@@ -16,7 +16,7 @@ MaintenanceSchedule.init({
         autoIncrement: true
     },
     maintenance_date: Sequelize.DATE
-}, { sequelize});
+}, {paranoid: true, sequelize});
 
 // MaintenanceSchedule.sync({force:true});
 

@@ -30,7 +30,6 @@ Pass.associate = function(){
     constraints: false });
 };
 
-
 //Pass.sync({force:true});
 
 module.exports = Pass;

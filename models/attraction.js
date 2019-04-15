@@ -26,7 +26,7 @@ Attraction.init({
   status:           Sequelize.STRING,
   handicap_access:  Sequelize.INTEGER,
   type:             Sequelize.STRING
-}, { sequelize});
+}, { paranoid: true, sequelize});
 
 Attraction.associate = function (){
   Attraction.hasMany(MaintenanceSchelude);

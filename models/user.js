@@ -17,7 +17,7 @@ User.init({
   username:     Sequelize.STRING,
   password:     Sequelize.STRING,
   status:       Sequelize.CHAR
-},{ sequelize});
+},{ paranoid: true,sequelize});
 
 // User.sync();
 

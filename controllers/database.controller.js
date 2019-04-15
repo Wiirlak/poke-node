@@ -1,8 +1,8 @@
 'use script';
 
 const models = require('../models');
-const sequelize = require('./database').sequelize;
-const Sequelize = require('./database').Sequelize;
+const sequelize = require('../models/database').sequelize;
+const Sequelize = require('../models/database').Sequelize;
 
 class databaseController {
 
@@ -14,8 +14,8 @@ class databaseController {
                 capacity: 40,
                 minimum_height: 135,
                 duration: 45,
-                opening: "08h59m59s",
-                closure: "18h59m59s",
+                opening: "08:59:59",
+                closure: "18:59:59",
                 status: "open",
                 handicap_access: 0,
                 type: "extreme"
@@ -25,8 +25,8 @@ class databaseController {
                 capacity: 10,
                 minimum_height: 1,
                 duration: 3*60,
-                opening: "10h00m00s",
-                closure: "15h00m00s",
+                opening: "10:00:00",
+                closure: "15:00:00",
                 status: "closed",
                 handicap_access: 0,
                 type: "famille"
@@ -36,8 +36,8 @@ class databaseController {
                 capacity: 75,
                 minimum_height: 125,
                 duration: 60,
-                opening: "09h30m00s",
-                closure: "17h30m00s",
+                opening: "09:30:00",
+                closure: "17:30:00",
                 status: "open",
                 handicap_access: 0,
                 type: "extreme"
@@ -47,8 +47,8 @@ class databaseController {
                 capacity: 20,
                 minimum_height: 1,
                 duration: 50,
-                opening: "08h59m59s",
-                closure: "18h59m59s",
+                opening: "08:59:59",
+                closure: "18:59:59",
                 status: "open",
                 handicap_access: 1,
                 type: "famille"
@@ -58,8 +58,8 @@ class databaseController {
                 capacity: 130,
                 minimum_height: 1,
                 duration: 5*60,
-                opening: "10h00m00s",
-                closure: "19h00m00s",
+                opening: "10:00:00",
+                closure: "19:00:00",
                 status: "open",
                 handicap_access: 0,
                 type: "vr"
@@ -81,9 +81,7 @@ class databaseController {
             }),
             models.Pass.create({
                 date_begin: "2019-10-01",
-                date_end: "2019-10-02",
-                date_in: "",
-                date_out: "",
+                date_end: "2019-10-02"
             }),
             models.Pass.create({
                 date_begin: "2019-03-21",
@@ -162,5 +160,6 @@ class databaseController {
             .catch(error => console.log(error));
     };
 }
+
 
 module.exports = new databaseController();
