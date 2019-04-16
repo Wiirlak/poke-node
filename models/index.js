@@ -13,5 +13,7 @@ module.exports = {
     MaintenanceSchedule:     require('./maintenanceSchedule')
 };
 
-// db.sequelize.sync({force:true});
-db.sequelize.sync();
+require('./relationship');
+
+db.sequelize.sync({force:true});
+//db.sequelize.sync();

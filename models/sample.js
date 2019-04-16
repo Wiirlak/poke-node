@@ -17,6 +17,4 @@ Sample.init({
   data: Sequelize.STRING,
 }, { paranoid: true,sequelize});
 
-Sample.sync();
-
 module.exports = Sample;

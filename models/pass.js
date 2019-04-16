@@ -1,6 +1,7 @@
 'use strict';
 
 const Model = require('sequelize').Model;
+const models = require('./');
 const sequelize = require('./database').sequelize;
 const Sequelize = require('./database').Sequelize;
 const PassType = require('./passType');
@@ -23,11 +24,20 @@ Pass.init({
   date_out:     Sequelize.DATE
 }, { sequelize});
 
-Pass.associate = function(){
-  Pass.belongsTo(PassType);
-  Pass.belongsToMany(Attraction, {
-    through: PassAccessAttraction,
-    constraints: false });
+Pass.associate = function(models){
+  Pass.belongsTo(models.PassType,{
+    onDelete: 'SET NULL'
+  });
+  Pass.belongsToMany(models.Attraction, {
+    through: models.PassAccessAttraction,
+    foreignKey: 'id_pass',
+    onDelete : 'CASCADE'
+  });
+  Pass.belongsToMany(models.Attraction, {
+    through: models.PassQueueAttraction,
+    foreignKey: 'id_pass',
+    onDelete : 'CASCADE'
+  });
 };
 
 //Pass.sync({force:true});

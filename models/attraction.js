@@ -1,6 +1,7 @@
 'use strict';
 
 const Model = require('sequelize').Model;
+const models = require('./');
 const sequelize = require('./database').sequelize;
 const Sequelize = require('./database').Sequelize;
 const MaintenanceSchelude = require('./maintenanceSchedule');
@@ -28,15 +29,18 @@ Attraction.init({
   type:             Sequelize.STRING
 }, { paranoid: true, sequelize});
 
-Attraction.associate = function (){
-  Attraction.hasMany(MaintenanceSchelude);
-  Attraction.belongsToMany(Pass, {
-    through: PassAccessAttraction,
-    constraints: false });
+Attraction.associate = function (models){
+  Attraction.hasMany(models.MaintenanceSchedule);
+  Attraction.belongsToMany(models.Pass, {
+    through: models.PassAccessAttraction,
+    foreignKey: 'id_attraction',
+    onDelete : 'CASCADE'
+  });
+  Attraction.belongsToMany(models.Pass, {
+    through: models.PassQueueAttraction,
+    foreignKey: 'id_attraction',
+    onDelete : 'CASCADE'
+  });
 };
-
-
-
-//Attraction.sync({force:true});
 
 module.exports = Attraction;
