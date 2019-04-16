@@ -100,13 +100,5 @@ router.get('/getAccess', async (req, res) => {
     res.status(404).end();
 });
 
-router.get('/getAccess/:id', async (req, res) => {
-    const p = await AttractionController.getNumberAccessAttraction(req.body.dateBegin, req.body.dateEnd, req.params.id);
-    if(p) {
-        return res.json(p);
-    }
-    res.status(404).end();
-});
-
 
 module.exports = router;

@@ -4,9 +4,6 @@ const Model = require('sequelize').Model;
 const models = require('./');
 const sequelize = require('./database').sequelize;
 const Sequelize = require('./database').Sequelize;
-const PassType = require('./passType');
-const Attraction = require('./attraction');
-const PassAccessAttraction = require('./passAccessAttraction');
 
 class Pass extends Model{}
 
@@ -30,13 +27,7 @@ Pass.associate = function(models){
   });
   Pass.belongsToMany(models.Attraction, {
     through: models.PassAccessAttraction,
-    foreignKey: 'id_pass',
-    onDelete : 'CASCADE'
-  });
-  Pass.belongsToMany(models.Attraction, {
-    through: models.PassQueueAttraction,
-    foreignKey: 'id_pass',
-    onDelete : 'CASCADE'
+    foreignKey: 'id_pass'
   });
 };
 

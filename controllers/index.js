@@ -6,6 +6,7 @@ module.exports = {
     PassController:         require('./pass.controller'),
     AttractionController:   require('./attraction.controller'),
     PassTypeController:         require('./passType.controller'),
-    MaintenanceSchedule:   require('./maintenanceSchedule.controller'),
-    DatabaseController:   require('./database.controller')
+    MaintenanceScheduleController:   require('./maintenanceSchedule.controller'),
+    DatabaseController:   require('./database.controller'),
+    PassAccessAttractionController:   require('./passAccessAttraction.controller')
 };

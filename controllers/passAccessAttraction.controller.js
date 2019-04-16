@@ -1,7 +1,10 @@
 'use script';
 
 const models = require('../models');
+const Sequelize = models.database.Sequelize;
 const PassAccessAttraction = models.PassAccessAttraction;
+const Attraction = models.Attraction;
+const Op = models.database.Sequelize.Op;
 
 class PassAccessAttractionController {
 
@@ -40,6 +43,29 @@ class PassAccessAttractionController {
                 id : id
             },force : force}).then(deletedPassAccessAttraction =>{
             return deletedPassAccessAttraction;
+        });
+    }
+
+    async getNumberAccessAttraction( dateBegin, dateEnd, attractionId){
+        return await PassAccessAttraction.findAndCountAll({
+            where: {
+                id_attraction: attractionId,
+                date_access: {
+                    [Op.between] : [dateBegin,dateEnd]
+                }
+            }
+        }).then(access => {
+            return access.count;
+        });
+    }
+
+    async getNumberAccessParc( dateBegin, dateEnd){
+        return await Attraction.findAll().then(async attractions=>{
+            const result = {};
+            await Sequelize.Promise.each(attractions,async attraction =>{
+                result[attraction.id] = await this.getNumberAccessAttraction(dateBegin,dateEnd,attraction.id);
+            });
+            return result;
         });
     }
 }

@@ -90,13 +90,19 @@ class databaseController {
                 date_out: "2019-03-21",
             }),
             models.PassAccessAttraction.create({
-                date_access: "2019-03-21"
+                date_access: "2019-03-21",
+                id_attraction: 1,
+                id_pass: 1
             }),
             models.PassAccessAttraction.create({
-                date_access: "2019-02-13"
+                date_access: "2019-02-13",
+                id_attraction: 1,
+                id_pass: 2
             }),
             models.PassAccessAttraction.create({
-                date_access: "2019-05-07"
+                date_access: "2019-05-07",
+                id_attraction: 1,
+                id_pass: 3
             }),
             models.PassQueueAttraction.create(),
             models.PassQueueAttraction.create(),

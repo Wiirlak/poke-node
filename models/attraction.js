@@ -33,13 +33,7 @@ Attraction.associate = function (models){
   Attraction.hasMany(models.MaintenanceSchedule);
   Attraction.belongsToMany(models.Pass, {
     through: models.PassAccessAttraction,
-    foreignKey: 'id_attraction',
-    onDelete : 'CASCADE'
-  });
-  Attraction.belongsToMany(models.Pass, {
-    through: models.PassQueueAttraction,
-    foreignKey: 'id_attraction',
-    onDelete : 'CASCADE'
+    foreignKey: 'id_attraction'
   });
 };
 

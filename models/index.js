@@ -15,5 +15,5 @@ module.exports = {
 
 require('./relationship');
 
-db.sequelize.sync({force:true});
-//db.sequelize.sync();
+//db.sequelize.sync({force:true});
+db.sequelize.sync();
