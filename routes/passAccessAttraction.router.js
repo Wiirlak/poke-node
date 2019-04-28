@@ -23,6 +23,38 @@ router.get('/getAccess/', async (req, res) => {
     res.status(404).end();
 });
 
+router.get('/stats/daily', async (req, res) => {
+    var today = new Date();
+    var date = req.query.date !== undefined ? req.query.date : today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+    const p = await PassAccessAttractionController.getNumberAccessParc(date);
+    if(p) {
+        return res.json(p);
+    }
+    res.status(404).end();
+});
+
+router.get('/stats/weekly', async (req, res) => {
+    var today = new Date();
+    var date = req.query.date !== undefined ? req.query.date : today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+    var date2 = req.query.date_end !== undefined ? req.query.date_end : today.getFullYear()+'-'+(today.getMonth()+1)+'-'+(today.getDate()-7);
+    const p = await PassAccessAttractionController.getNumberAccessParc(date, date2);
+    if(p) {
+        return res.json(p);
+    }
+    res.status(404).end();
+});
+
+router.get('/stats', async (req, res) => {
+    var today = new Date();
+    var date = req.query.date !== undefined ? req.query.date : today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+    var date2 = req.query.date_end !== undefined ? req.query.date_end : '1987-01-01';
+    const p = await PassAccessAttractionController.getNumberAccessParc(date2, date);
+    if(p) {
+        return res.json(p);
+    }
+    res.status(404).end();
+});
+
 router.get('/:id', async (req, res) => {
     const p = await PassAccessAttractionController.getPassAccessAttraction(req.params.id);
     if(p) {
@@ -33,7 +65,6 @@ router.get('/:id', async (req, res) => {
 });
 
 router.get('/', async (req, res) => {
-    console.log("here");
     const p = await PassAccessAttractionController.getAll();
     if(p) {
         return res.json(p).status(200);

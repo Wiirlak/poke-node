@@ -3,8 +3,91 @@
 const models = require('../models');
 const sequelize = require('../models/database').sequelize;
 const Sequelize = require('../models/database').Sequelize;
+const faker = require('faker');
 
 class databaseController {
+
+    async seedFake(){
+        return Promise.all([
+            //Attractions
+            forEach(i, faker.random.number(20)), await{
+                models:Attraction.create({
+                    name: faker.random.word(),
+                    capacity: faker.random.number(100),
+                    minimum_height: faker.random.number(100)+100,
+                    duration: faker.random.number(120)+30,
+                    opening: faker.random.number(11)  + ':' + faker.random.number(59)  + ':' + faker.random.number(59),
+                    closure: faker.random.number(11)+12  + ':' + faker.random.number(59)  + ':' + faker.random.number(59),
+                    status: "open",
+                    handicap_access: faker.random.boolean(),
+                    type: "extreme"
+                })
+            },
+            forEach(i, faker.random.number(20)), await{
+                models:Pass.create({
+                    date_begin: "2019-01-01",
+                    date_end: "2020-01-01",
+                    date_in: "2019-02-23",
+                    date_out: "2019-02-23",
+                }),
+            },
+            models.Pass.create({
+                date_begin: "2019-01-01",
+                date_end: "2020-01-01",
+                date_in: "2019-02-23",
+                date_out: "2019-02-23",
+            }),
+            models.PassAccessAttraction.create({
+                date_access: "2019-02-13",
+                id_attraction: 1,
+                id_pass: 2
+            }),
+            models.User.create({
+                username: "admin",
+                password: "admin",
+                status: 'a'
+            }),
+            models.MaintenanceSchedule.create({
+                maintenance_date: "2018-11-23"
+            }),
+            models.PassQueueAttraction.create(),
+            models.PassType.create({
+                name: "PASS journée",
+                description: "Pass valide une journée",
+                attraction_path: ""
+            }),
+            models.PassType.create({
+                name: "PASS Week-end",
+                description: "Pass valide un wee-kend",
+                attraction_path: ""
+            }),
+            models.PassType.create({
+                name: "PASS 1 daymonth",
+                description: "Pass utilisable un jour par mois",
+                attraction_path: ""
+            }),
+            models.PassType.create({
+                name: "PASS 1 attraction",
+                description: "Pass reservé à une seule attraction",
+                attraction_path: "{3}"
+            }),
+            models.PassType.create({
+                name: "PASS Escape Game",
+                description: "Pass permettant de participer aux escape game",
+                attraction_path: "{1,2,5,4}"
+            }),
+            models.PassType.create({
+                name: "PASS Night",
+                description: "Pass donnant accès au parc la nuit (si attractions ouvertes)",
+                attraction_path: "{1,2,5,6}"
+            }),
+            models.PassType.create({
+                name: "PASS Admin",
+                description: "root Pass",
+                attraction_path: ""
+            })
+        ]).catch(error => console.log(error));
+    };
 
     async seedAll() {
         return Promise.all([

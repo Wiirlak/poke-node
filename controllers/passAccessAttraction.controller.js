@@ -60,10 +60,12 @@ class PassAccessAttractionController {
     }
 
     async getNumberAccessParc( dateBegin, dateEnd){
+        if (dateEnd === undefined)
+            dateEnd = dateBegin;
         return await Attraction.findAll().then(async attractions=>{
             const result = {};
             await Sequelize.Promise.each(attractions,async attraction =>{
-                result[attraction.id] = await this.getNumberAccessAttraction(dateBegin,dateEnd,attraction.id);
+                result[attraction.name] = await this.getNumberAccessAttraction(dateBegin,dateEnd,attraction.id);
             });
             return result;
         });

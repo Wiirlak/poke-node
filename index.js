@@ -3,6 +3,7 @@ require('dotenv').config();
 
 const express = require('express');
 const morgan = require('morgan');
+const faker = require('faker');
 const RouterBuilder = require('./routes');
 const DatabaseController = require('./controllers').DatabaseController;
 
@@ -12,6 +13,7 @@ app.use(morgan('dev'));
 
 RouterBuilder.build(app);
 
+console.log(faker.fake("{{random.number(100)}}"));
 //DatabaseController.seedAll();
 
 const port = process.env.PORT || 3001;
