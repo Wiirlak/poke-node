@@ -4,7 +4,6 @@ db = require('./database');
 module.exports = {
     database:       db,
     PassType:       require('./passType'),
-    Sample:         require('./sample'),
     User:           require('./user'),
     Pass:           require('./pass'),
     Attraction:     require('./attraction'),
