@@ -3,9 +3,11 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const MaintenanceScheduleController = require('../controllers').MaintenanceScheduleController;
+const AuthController = require('../controllers').AuthController;
 
 const router = express.Router();
 router.use(bodyParser.json());
+router.use(AuthController.authenticate());
 
 router.post('/', async (req, res) => {
 

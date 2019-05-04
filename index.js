@@ -14,7 +14,7 @@ app.use(morgan('dev'));
 RouterBuilder.build(app);
 
 //console.log(faker.fake("{{random.number(100)}}"));
-DatabaseController.seedFake();
+//DatabaseController.seedFake();
 
 const port = process.env.PORT || 3001;
 app.listen(port, () => console.log(`LINK START !!! Welcome on server ${port}...`));

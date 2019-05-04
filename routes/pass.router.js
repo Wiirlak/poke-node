@@ -3,9 +3,11 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const PassController = require('../controllers').PassController;
+const AuthController = require('../controllers').AuthController;
 
 const router = express.Router();
 router.use(bodyParser.json());
+router.use(AuthController.authenticate());
 
 router.post('/', async (req, res) => {
     try {

@@ -8,6 +8,7 @@ class RouterBuilder {
         app.use('/attraction', require('./attraction.router'));
         app.use('/maintenanceSchedule', require('./maintenanceSchedule.router'));
         app.use('/passAccessAttraction', require('./passAccessAttraction.router'));
+        app.use('/', require('./Auth.route'));
     }
 }
 

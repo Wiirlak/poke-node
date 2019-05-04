@@ -7,16 +7,17 @@ const database = models.database;
 class UserController {
 
     async addUser(username,password,status) {
-        status = (status !== undefined ? status:1);
+        const cypherPassword = await User.generateHash(password);
+        status = (status !== undefined ? status:"u");
         return User.create({
             username: username || "",
-            password: password || "",
+            password: cypherPassword || "",
             status: status || "u"
         });
     }
 
     async getUser(id) {
-        return User.findOne({
+        return await User.findOne({
             where: {
                 id: id
             }
@@ -49,23 +50,6 @@ class UserController {
         });
     }
 
-    passwordHash(pwd) {
-        const bcrypt = require('bcrypt');
-        const saltRounds = 10;
-        bcrypt.hash(pwd, saltRounds, function(err, hash) {
-            // Store hash in your password DB.
-        });
-    }
-
-    async checkUser(usr, pwd) {
-        const match =  bcrypt.compare(pwd, usr.password);
-
-        if(match) {
-            //login
-        }
-
-        //...
-    }
 
 }
 

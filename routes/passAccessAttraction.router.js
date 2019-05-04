@@ -3,9 +3,11 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const PassAccessAttractionController = require('../controllers').PassAccessAttractionController;
+const AuthController = require('../controllers').AuthController;
 
 const router = express.Router();
 router.use(bodyParser.json());
+router.use(AuthController.authenticate());
 
 router.get('/getAccess/:id', async (req, res) => {
     const p = await PassAccessAttractionController.getNumberAccessAttraction(req.query.dateBegin, req.query.dateEnd, req.params.id);
