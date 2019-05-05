@@ -2,6 +2,9 @@
 
 const models = require('../models');
 const MaintenanceSchedule = models.MaintenanceSchedule;
+const Pass = models.Pass;
+const PassAccessAttractionController = require('../controllers').PassAccessAttractionController;
+
 
 class MaintenanceScheduleController {
 
@@ -44,6 +47,7 @@ class MaintenanceScheduleController {
             return deletedMaintenanceSchedule;
         });
     }
+
 }
 
 module.exports = new MaintenanceScheduleController();

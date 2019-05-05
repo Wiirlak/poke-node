@@ -17,6 +17,4 @@ PassAccessAttraction.init({
     date_access:     Sequelize.DATE
 }, { sequelize});
 
-// PassAccessAttraction.sync({force:true});
-
 module.exports = PassAccessAttraction;

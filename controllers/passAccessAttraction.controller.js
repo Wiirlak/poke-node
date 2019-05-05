@@ -119,6 +119,7 @@ class PassAccessAttractionController {
     }
 
     async getNumberAccessParc( dateBegin, dateEnd){
+        console.log("here");
         if (dateEnd === undefined)
             dateEnd = dateBegin;
         return await Attraction.findAll().then(async attractions=>{
@@ -128,6 +129,46 @@ class PassAccessAttractionController {
             });
             return result;
         });
+    }
+
+    async getNumberAccessParcWeekly( date){
+        var curr = new Date(date); // get current date
+        var first = curr.getDate() - curr.getDay(); // First day is the day of the month - the day of the week
+        var last = first + 6; // last day is the first day + 6
+
+        var firstday = new Date(curr.setDate(first));
+        var lastday = new Date(curr.setDate(last));
+        console.log(firstday);
+        console.log(lastday);
+        return await Attraction.findAll().then(async attractions=>{
+            const result = {};
+            await Sequelize.Promise.each(attractions,async attraction =>{
+                result[attraction.name] = await this.getNumberAccessAttraction(firstday,lastday,attraction.id);
+            });
+            return result;
+        });
+    }
+
+    async getOptiMonth(id){
+        let i = 0;
+        let today = new Date();
+        let array = {};
+        let min = 0;
+        let months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+        array["access"] = {};
+        array["best_months"] = [];
+        for(; i < 12 ; i++){
+            let dateEnd = new Date(today.getFullYear(),today.getMonth()-i);
+            let dateBegin = new Date(today.getFullYear(),today.getMonth()-i-1,2);
+            array["access"][(today.getMonth()-i+11)%12] = await this.getNumberAccessAttraction(dateBegin,dateEnd,id);
+            min = array["access"][min] > array["access"][(today.getMonth()-i+11)%12] ? (today.getMonth()-i+11)%12 : min;
+        }
+        for(i = 0; i < 12 ; i++){
+            if(array["access"][min] === array["access"][i]){
+                array["best_months"].push(months[i]);
+            }
+        }
+        return array;
     }
 }
 

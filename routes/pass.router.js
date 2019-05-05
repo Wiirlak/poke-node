@@ -25,6 +25,14 @@ router.post('/', async (req, res) => {
     }
 });
 
+router.get('/in', async (req, res) => {
+    const p = await PassController.getCurrentPassIn();
+    if(p || p === 0) {
+        return res.json({"count" : p});
+    }
+    res.status(404).end();
+});
+
 router.get('/:id', async (req, res) => {
    const p = await PassController.getPass(req.params.id);
    if(p) {

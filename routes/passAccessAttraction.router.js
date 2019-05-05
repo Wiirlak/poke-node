@@ -25,6 +25,15 @@ router.get('/getAccess/', async (req, res) => {
     res.status(404).end();
 });
 
+router.get('/opti/:id', async (req, res) => {
+    const p = await PassAccessAttractionController.getOptiMonth(req.params.id);
+    if(p) {
+        return res.json(p).end();
+    }
+    res.status(404).end();
+
+});
+
 router.get('/stats/daily', async (req, res) => {
     var today = new Date();
     var date = req.query.date !== undefined ? req.query.date : today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
@@ -38,8 +47,8 @@ router.get('/stats/daily', async (req, res) => {
 router.get('/stats/weekly', async (req, res) => {
     var today = new Date();
     var date = req.query.date !== undefined ? req.query.date : today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-    var date2 = req.query.date_end !== undefined ? req.query.date_end : today.getFullYear()+'-'+(today.getMonth()+1)+'-'+(today.getDate()-7);
-    const p = await PassAccessAttractionController.getNumberAccessParc(date, date2);
+    //var date2 = req.query.date_end !== undefined ? req.query.date_end : today.getFullYear()+'-'+(today.getMonth()+1)+'-'+(today.getDate()-7);
+    const p = await PassAccessAttractionController.getNumberAccessParcWeekly(date);
     if(p) {
         return res.json(p);
     }
