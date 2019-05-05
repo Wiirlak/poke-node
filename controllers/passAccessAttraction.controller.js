@@ -26,11 +26,21 @@ class PassAccessAttractionController {
         return true;
     }
 
+    isOneDayMonth(pss, date_access){
+        let today = new Date(pss.date_out);
+        let enter = new Date(date_access);
+        let dateEnd = new Date(today.getFullYear(),today.getMonth()+1,0);
+        console.log(dateEnd + " | " + enter);
+        if(dateEnd > enter )
+            return false;
+        return true;
+    }
+
     isDateAuthorised(pass, date_access){
         var edate = new Date(pass.date_end);
         var adate = new Date(date_access);
 
-        if (edate - adate < 0)
+        if (edate < adate)
             return false;
         return true;
     }
@@ -49,9 +59,9 @@ class PassAccessAttractionController {
             }
         });
         if(passType.name === "PASS Escape Game"){
-            var res = await this.escapeGame(passType, pass, id_attraction)
-            console.log(res);
-            return res;
+            return await this.escapeGame(passType, pass, id_attraction);
+        }else if(passType.name === "PASS 1 daymonth"){
+            return this.isOneDayMonth(pass, date_access);
         }
         if(passType.attraction_path === "")
             return true;
