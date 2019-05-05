@@ -3,7 +3,9 @@
 const models = require('../models');
 const Pass = models.Pass;
 const database = models.database;
-
+const sequelize = models.database.sequelize;
+const Sequelize = models.database.Sequelize;
+const Op = models.database.Sequelize.Op;
 class PassController {
 
     async addPass(date_end, date_begin, date_in, date_out) {
@@ -50,6 +52,18 @@ class PassController {
         });
     }
 
+    async getCurrentPassIn(){
+        console.log("here");
+        return await Pass.findAndCountAll({
+            where: {
+                date_in:{
+                    [Op.gt] : sequelize.col('date_out')
+                }
+            }
+        }).then(access => {
+            return access.count;
+        });
+    }
 }
 
 module.exports = new PassController();

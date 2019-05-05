@@ -5,8 +5,8 @@ module.exports = {
     PassController:         require('./pass.controller'),
     AttractionController:   require('./attraction.controller'),
     PassTypeController:         require('./passType.controller'),
+    PassAccessAttractionController:   require('./passAccessAttraction.controller'),
     MaintenanceScheduleController:   require('./maintenanceSchedule.controller'),
     DatabaseController:   require('./database.controller'),
-    PassAccessAttractionController:   require('./passAccessAttraction.controller'),
     AuthController: require('./Auth.controller'),
 };
