@@ -11,6 +11,7 @@ class databaseController {
         var dbegin;
         var dend;
         var dout;
+        var passtype;
         var nbAttr = faker.random.number(20);
         var nbPass = faker.random.number(1000);
 
@@ -27,29 +28,6 @@ class databaseController {
                     status: "open",
                     handicap_access: faker.random.boolean(),
                     type: "extreme"
-                }));
-        }
-        ;
-
-        for (var i = 0; i < nbPass; i++) {
-            dbegin = faker.date.between(faker.date.recent(10), faker.date.future(2));
-            dend = faker.date.future(1, dbegin);
-            dout = faker.date.between(dbegin, dend);
-            data.push(
-                await models.Pass.create({
-                    date_begin: dbegin,
-                    date_end: dend,
-                    date_in: dout,
-                    date_out: faker.date.between(dout, dend)
-                }));
-        }
-
-        for (var i = 0; i < faker.random.number(200); i++) {
-            data.push(
-                await models.PassAccessAttraction.create({
-                    date_access: faker.date.between(faker.date.recent(10), faker.date.future(2)),
-                    id_attraction: faker.random.number(nbAttr-1) + 1,
-                    id_pass: faker.random.number(nbPass-1) + 1
                 }));
         }
 
@@ -84,23 +62,64 @@ class databaseController {
         data.push(await models.PassType.create({
             name: "PASS 1 attraction",
             description: "Pass reservé à une seule attraction",
-            attraction_path: "{3}"
+            attraction_path:
+                '{' +
+                    '"0":"3"' +
+                '}'
         }));
         data.push(await models.PassType.create({
             name: "PASS Escape Game",
             description: "Pass permettant de participer aux escape game",
-            attraction_path: "{1,2,5,4}"
+            attraction_path:
+                '{' +
+                    '"0":"1",' +
+                    '"1":"2",' +
+                    '"2":"5",' +
+                    '"3":"4"' +
+                '}',
         }));
         data.push(await models.PassType.create({
             name: "PASS Night",
             description: "Pass donnant accès au parc la nuit (si attractions ouvertes)",
-            attraction_path: "{1,2,5,6}"
+            attraction_path:
+                '{' +
+                    '"0":"1",' +
+                    '"1":"2",' +
+                    '"2":"3",' +
+                    '"3":"5",' +
+                    '"4":"6"' +
+                '}'
         }));
         data.push(await models.PassType.create({
             name: "PASS Admin",
             description: "root Pass",
             attraction_path: ""
         }));
+
+        for (var i = 0; i < nbPass; i++) {
+            dbegin = faker.date.between(faker.date.recent(10), faker.date.future(2));
+            dend = faker.date.future(1, dbegin);
+            dout = faker.date.between(dbegin, dend);
+            passtype = faker.random.number(6)+1;
+            data.push(
+                await models.Pass.create({
+                    date_begin: dbegin,
+                    date_end: dend,
+                    date_in: dout,
+                    date_out: faker.date.between(dout, dend),
+                    id_passType: passtype,
+                    attraction_current: passtype === 5 ? faker.random.number(3) : "0" //escape game
+                }));
+        }
+
+        for (var i = 0; i < faker.random.number(200); i++) {
+            data.push(
+                await models.PassAccessAttraction.create({
+                    date_access: faker.date.between(faker.date.recent(10), faker.date.future(2)),
+                    id_attraction: faker.random.number(nbAttr-1) + 1,
+                    id_pass: faker.random.number(nbPass-1) + 1
+                }));
+        }
 
         return Promise.all(data);
 

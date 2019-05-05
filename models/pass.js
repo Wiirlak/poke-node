@@ -15,18 +15,19 @@ Pass.init({
     primaryKey: true,
     autoIncrement: true
   },
-  date_begin:   Sequelize.DATE,
-  date_end:     Sequelize.DATE,
-  date_in:      Sequelize.DATE,
-  date_out:     Sequelize.DATE
+  date_begin:         Sequelize.DATE,
+  date_end:           Sequelize.DATE,
+  date_in:            Sequelize.DATE,
+  date_out:           Sequelize.DATE,
+  attraction_current: Sequelize.INTEGER
 }, { sequelize});
 
 Pass.associate = function(models){
   Pass.belongsTo(models.PassType,{
-    onDelete: 'SET NULL'
+    onDelete: 'SET NULL',
+    foreignKey: 'id_passType'
   });
-  Pass.belongsToMany(models.Attraction, {
-    through: models.PassAccessAttraction,
+  Pass.hasMany(models.PassAccessAttraction, {
     foreignKey: 'id_pass'
   });
 };

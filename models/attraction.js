@@ -18,21 +18,20 @@ Attraction.init({
     primaryKey:     true,
     autoIncrement:  true
   },
-  name:             Sequelize.STRING,
-  capacity:         Sequelize.INTEGER,
-  minimum_height:   Sequelize.INTEGER,
-  duration:         Sequelize.INTEGER,
-  opening:          Sequelize.TIME,
-  closure:          Sequelize.TIME,
-  status:           Sequelize.STRING,
-  handicap_access:  Sequelize.INTEGER,
-  type:             Sequelize.STRING
+  name:               Sequelize.STRING,
+  capacity:           Sequelize.INTEGER,
+  minimum_height:     Sequelize.INTEGER,
+  duration:           Sequelize.INTEGER,
+  opening:            Sequelize.TIME,
+  closure:            Sequelize.TIME,
+  status:             Sequelize.STRING,
+  handicap_access:    Sequelize.INTEGER,
+  type:               Sequelize.STRING
 }, { paranoid: true, sequelize});
 
 Attraction.associate = function (models){
   Attraction.hasMany(models.MaintenanceSchedule);
-  Attraction.belongsToMany(models.Pass, {
-    through: models.PassAccessAttraction,
+  Attraction.hasMany(models.PassAccessAttraction, {
     foreignKey: 'id_attraction'
   });
 };

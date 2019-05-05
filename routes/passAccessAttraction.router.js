@@ -78,11 +78,31 @@ router.get('/', async (req, res) => {
 router.post('/', async (req, res) => {
 
     try {
-        const p = await PassAccessAttractionController.addPassAccessAttraction(req.body.date_access);
-        res.json(p);
+        const p = await PassAccessAttractionController.addPassAccessAttraction(req.body.date_access, req.body.id_attraction, req.body.id_pass);
+        if(p === 0)
+            res.status(403).end();
+        else
+            res.json(p);
     } catch(err) {
-        res.status(409).end();
+        console.log(err);
+        res.status(404).end();
     }
+});
+
+router.delete('/force/:id', async (req, res) => {
+    const p = await PassAccessAttractionController.deletePassAccessAttraction(req.params.id,true);
+    if(p === 0) {
+        res.status(200).end();
+    }
+    res.status(404).end();
+});
+
+router.delete('/:id', async (req, res) => {
+    const p = await PassAccessAttractionController.deletePassAccessAttraction(req.params.id,false);
+    if(p === 0) {
+        res.status(200).end();
+    }
+    res.status(404).end();
 });
 
 module.exports = router;

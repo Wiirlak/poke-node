@@ -9,7 +9,7 @@ class PassTypeController {
         return PassType.create({
             name: name || "",
             description: description || "",
-            attraction_path: attraction_path || "{'0':'0'}"
+            attraction_path: JSON.stringify(attraction_path) || '{}'
         });
     }
 

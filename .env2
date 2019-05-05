@@ -1,6 +1,0 @@
-PORT=6789
-DB_HOST=manny.db.elephantsql.com
-DB_USER=zgnjlfbw
-DB_PASSWORD=pyINll8CM7Y5hsAT85xctqS0bHyiRqD1
-DB_PORT=5432
-DB_NAME=zgnjlfbw

@@ -2,6 +2,8 @@
 
 const models = require('../models');
 const Attraction = models.Attraction;
+const faker = require('faker');
+const PassType = models.PassType;
 
 class AttractionController {
 
@@ -53,6 +55,51 @@ class AttractionController {
             id : id
         },force : force}).then(deletedAttraction =>{
             return deletedAttraction;
+        });
+    }
+
+    async nightOpening(id,hour_closure){
+        var passType = await PassType.findOne({
+            where: {
+                name: "PASS Night"
+            }
+        });
+        var json = JSON.parse(passType.attraction_path);
+        json[Object.keys(json).length] = id;
+        await passType.update(json);
+
+        return await Attraction.findOne({
+            where: {
+                id: id
+            }
+        }).then(attraction =>{
+            return attraction.update({
+                closure : hour_closure || attraction.closure ,
+                status : "open",
+            });
+        });
+    }
+
+    async nightClosing(id,hour_closure){
+        var passType = await PassType.findOne({
+            where: {
+                name: "PASS Night"
+            }
+        });
+        var json = JSON.parse(passType.attraction_path);
+        for (var i in json)
+            if(json[i] === id) json.splice(i,1);
+        await passType.update(json);
+
+        return await Attraction.findOne({
+            where: {
+                id: id
+            }
+        }).then(attraction =>{
+            return attraction.update({
+                closure : hour_closure || faker.random.number(11) + 12 + ':' + faker.random.number(59) + ':' + faker.random.number(59) ,
+                status : "open",
+            });
         });
     }
 
