@@ -1,0 +1,18 @@
+'use script';
+db = require('./database');
+
+module.exports = {
+    database:       db,
+    PassType:       require('./passType'),
+    User:           require('./user'),
+    Pass:           require('./pass'),
+    Attraction:     require('./attraction'),
+    PassAccessAttraction:     require('./passAccessAttraction'),
+    PassQueueAttraction:     require('./passQueueAttraction'),
+    MaintenanceSchedule:     require('./maintenanceSchedule')
+};
+
+require('./relationship');
+
+//db.sequelize.sync({force:true});
+db.sequelize.sync();
